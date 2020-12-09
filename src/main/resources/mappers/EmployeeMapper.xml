@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hr.mapper.EmployeeMapper">
+
+	<resultMap type="com.hr.model.Employee" id="empResultMap">
+		<result  property="id" column="id"/>
+		<result property="firstName" column="first_name"/>
+		<result property="lastName" column="last_name"/>
+		<result property="address" column="address"/>
+		<result property="salary" column="salary"/>
+		<association property="department" column="department_id" select="getDpet"></association>
+	</resultMap>
+	<select id="getAllEmps" resultMap="empResultMap">
+		select id, first_name, last_name, address, salary, department_id from employees
+	</select>
+
+	<select id="getDpet" resultMap="deptResultMap">
+		select id, department_name, location_id, manager_id from departments where id= #{id}
+	</select>
+	<resultMap type="com.hr.model.Department" id="deptResultMap">
+		<result property="id" column="id"/>
+		<result property="departmentName" column="department_name"/>
+		<result property="locationId" column="location_id"/>
+		<result property="managerId" column="manager_id"/>
+	</resultMap>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	<!-- <resultMap type="com.hr.model.Employee" id="empResultMap">
+		<result property="id" column="id"/>
+		<result property="firstName" column="first_name" />
+		<result property="lastName" column="last_name"/>
+		<result property="address"  column="address"/>
+		<result property="salary" column="salary"/>
+		 <association property="department" column="department_id" select="getDept"></association>
+	</resultMap>
+	<select id="getAllEmps" resultMap="empResultMap" >
+		select id, first_name, last_name, address, salary, department_id  from employees
+	</select>
+	  <select id="getDept" resultMap="deptResultMap">
+		select id, department_name, location_id, manager_id  from departments where id= #{id}
+	</select>
+	<resultMap type="com.hr.model.Department" id="deptResultMap">
+		<result property="id" column="id"/>
+		<result property="departmentName" column="department_name"/>
+		<result property="locationId" column="location_id"/>
+		<result property="managerId" column="manager_id"/>
+	</resultMap> -->
+	
+</mapper>
